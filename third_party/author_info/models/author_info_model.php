@@ -6,7 +6,6 @@
  * @author          Stephen Lewis (http://github.com/experience/)
  * @copyright       Experience Internet
  * @package         Author_info
- * @version         1.0.0
  */
 
 require_once dirname(__FILE__) .'/../config.php';
