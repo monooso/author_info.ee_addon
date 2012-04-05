@@ -89,19 +89,20 @@ class Test_author_info_model extends Testee_unit_test_case {
     $this->EE->db->expectOnce('select', array(implode(', ', $select_fields)));
     $this->EE->db->expectOnce('from', array('members'));
     $this->EE->db->expectCallCount('join', 2);
+
     $this->EE->db->expectAt(0, 'join', array('member_groups',
       'member_groups.group_id = members.group_id', 'inner'));
 
     $this->EE->db->expectAt(1, 'join', array('channel_titles',
       'channel_titles.author_id = members.member_id', 'inner'));
 
-    $this->EE->db->expectOnce('get_where', array(
-      'channel_titles',
-      array('channel_titles.entry_id' => $entry_id),
-      1
-    ));
+    $this->EE->db->expectOnce('where',
+      array('channel_titles.entry_id', $entry_id));
 
-    $this->EE->db->returnsByReference('get_where', $db_result);
+    $this->EE->db->expectOnce('limit', array(1));
+    $this->EE->db->expectOnce('get');
+
+    $this->EE->db->returnsByReference('get', $db_result);
     $db_result->returns('num_rows', 1);
     $db_result->returns('row_array', $db_row);
 
@@ -115,7 +116,7 @@ class Test_author_info_model extends Testee_unit_test_case {
     $entry_id   = 10;
     $db_result  = $this->_get_mock('db_query');
 
-    $this->EE->db->returnsByReference('get_where', $db_result);
+    $this->EE->db->returnsByReference('get', $db_result);
     $db_result->returns('num_rows', 0);
     $db_result->returns('row_array', FALSE);
 

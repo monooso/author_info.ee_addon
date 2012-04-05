@@ -107,8 +107,9 @@ class Author_info_model extends CI_Model {
         'inner')
       ->join('channel_titles', 'channel_titles.author_id = members.member_id',
         'inner')
-      ->get_where('channel_titles',
-        array('channel_titles.entry_id' => $entry_id), 1);
+      ->where('channel_titles.entry_id', $entry_id)
+      ->limit(1)
+      ->get();
 
     if ( ! $db_author->num_rows())
     {
