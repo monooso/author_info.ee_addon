@@ -50,7 +50,6 @@ equivalent.
 
     {exp:channel:entries channel='example'}
       {exp:author_info entry_id='{entry_id}'}
-      {if no_results}<p>Unable to find the author info.</p>{/if}
 
       <dl>
         <dt>Author Email</dt>
