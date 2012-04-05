@@ -44,6 +44,16 @@ class Test_author_info extends Testee_unit_test_case {
   }
 
 
+  public function test__default_tag__loads_model_and_language_file()
+  {
+    $this->EE->load->expectOnce('add_package_path');
+    $this->EE->load->expectOnce('model', array('author_info_plugin_model'));
+    $this->EE->lang->expectOnce('loadfile');
+
+    $subject = new Author_info();
+  }
+
+
   public function test__default_tag__retrieves_entry_id_parameter()
   {
     $entry_id = FALSE;    // Ensures we go no further.
@@ -56,22 +66,30 @@ class Test_author_info extends Testee_unit_test_case {
   }
 
 
-  public function test__default_tag__returns_empty_handed_if_no_entry_id_parameter()
+  public function test__default_tag__logs_message_and_returns_empty_handed_if_no_entry_id_parameter()
   {
-    $tmpl = $this->EE->TMPL;
+    $error  = 'This is an error message.';
+    $lang   = $this->EE->lang;
+    $tmpl   = $this->EE->TMPL;
 
-    $this->_pi_model->expectNever('get_author_info_from_entry_id');
     $tmpl->returns('fetch_param', FALSE, array('entry_id'));
+    $this->_pi_model->expectNever('get_author_info_from_entry_id');
+
+    $lang->expectOnce('line');
+    $lang->returns('line', $error);
+    $tmpl->expectOnce('log_item', array($error));
 
     $subject = new Author_info();
     $this->assertIdentical('', $subject->return_data);
   }
 
 
-  public function test__default_tag__returns_empty_handed_if_model_returns_false()
+  public function test__default_tag__logs_message_and_returns_empty_handed_if_model_returns_false()
   {
     $entry_id = '10';
-    $tmpl = $this->EE->TMPL;
+    $error    = 'This is an error message.';
+    $lang     = $this->EE->lang;
+    $tmpl     = $this->EE->TMPL;
 
     $tmpl->returns('fetch_param', $entry_id, array('entry_id'));
 
@@ -79,6 +97,10 @@ class Test_author_info extends Testee_unit_test_case {
       array($entry_id));
 
     $this->_pi_model->returns('get_author_info_from_entry_id', FALSE);
+
+    $lang->expectOnce('line');
+    $lang->returns('line', $error);
+    $tmpl->expectOnce('log_item', array($error));
 
     $subject = new Author_info();
     $this->assertIdentical('', $subject->return_data);

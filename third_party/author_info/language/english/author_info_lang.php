@@ -9,9 +9,9 @@
  */
 
 $lang = array(
-  'author_info_module_name' => 'Author Info',
-  'author_info_module_description' => 'Provides additional information about the author of a Channel entry.',
 
+  'missing_entry_id'  => 'ERROR: The author_info tag requires an entry_id parameter',
+  'no_author_info'    => 'ERROR: Unable to find the author info for Channel entry %1$s.',
 
   // All done.
   '' => ''

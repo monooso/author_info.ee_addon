@@ -116,18 +116,27 @@ USAGE;
   public function __construct($content = '')
   {
     $this->EE =& get_instance();
-
     $this->EE->load->add_package_path(PATH_THIRD .'author_info/');
 
+    // Load the model.
     $this->EE->load->model('author_info_plugin_model');
     $this->_pi_model = $this->EE->author_info_plugin_model;
 
+    // Need to explicitly load the language file.
+    $this->EE->lang->loadfile('author_info');
+
     // Retrieve the entry ID.
-    if ( ! $entry_id = $this->EE->TMPL->fetch_param('entry_id')
-      OR ! $author = $this->_pi_model->get_author_info_from_entry_id($entry_id)
-    )
+    if ( ! $entry_id = $this->EE->TMPL->fetch_param('entry_id'))
     {
-      // Abandon all hope.
+      $this->EE->TMPL->log_item($this->EE->lang->line('missing_entry_id'));
+      return;
+    }
+
+    if ( ! $author = $this->_pi_model->get_author_info_from_entry_id($entry_id))
+    {
+      $this->EE->TMPL->log_item(
+        sprintf($this->EE->lang->line('no_author_info'), $entry_id));
+
       return;
     }
 
