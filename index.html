@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Author info.ee addon by experience</title>
+    
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Author info.ee addon</h1>
+        <p>Provides additional information about the author of a Channel entry.</p>
+        <p class="view"><a href="https://github.com/experience/author_info.ee_addon">View the Project on GitHub <small>experience/author_info.ee_addon</small></a></p>
+        <ul>
+          <li><a href="https://github.com/experience/author_info.ee_addon/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/experience/author_info.ee_addon/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/experience/author_info.ee_addon">Fork On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>Author Info</h1>
+
+<p>Author Info provides additional information about the author of a Channel entry. It is intended for use within a standard <code>{exp:channel:entries}</code> tag, or equivalent.</p>
+
+<h2>Example Usage</h2>
+
+<pre><code>{exp:channel:entries channel='example'}
+  {exp:author_info entry_id='{entry_id}'}
+
+  &lt;dl&gt;
+    &lt;dt&gt;Author Email&lt;/dt&gt;
+    &lt;dd&gt;{author:email}&lt;/dd&gt;
+
+    &lt;dt&gt;Author Group ID&lt;/dt&gt;
+    &lt;dd&gt;{author:group_id}&lt;/dd&gt;
+
+    &lt;dt&gt;Author Is Admin?&lt;/dt&gt;
+    &lt;dd&gt;{if author:is_admin}Big Cheese{if:else}Little Minion{/if}&lt;/dd&gt;
+
+    &lt;dt&gt;Author Member ID&lt;/dt&gt;
+    &lt;dd&gt;{author:member_id}&lt;/dd&gt;
+
+    &lt;dt&gt;Author Screen Name&lt;/dt&gt;
+    &lt;dd&gt;{author:screen_name}&lt;/dd&gt;
+
+    &lt;dt&gt;Author Username&lt;/dt&gt;
+    &lt;dd&gt;{author:username}&lt;/dd&gt;
+  &lt;/dl&gt;
+  {/exp:author_info}
+{/exp:channel:entries}
+</code></pre>
+
+<h2>Parameters</h2>
+
+<p>The Author Info tag accepts a single mandatory parameter, <code>entry_id</code>.</p>
+
+<h2>Single Variables</h2>
+
+<p>The following single variables are available for use within the Author Info tag
+pair.</p>
+
+<p><code>author:email</code>
+: The Member's email address.</p>
+
+<p><code>author:group_id</code>
+: The Member's Member Group ID.</p>
+
+<p><code>author:is_admin</code>
+: <code>TRUE</code> if the Member has Control Panel access, <code>FALSE</code> otherwise.</p>
+
+<p><code>author:member_id</code>
+: The Member's ID.</p>
+
+<p><code>author:screen_name</code>
+: The Member's Screen Name.</p>
+
+<p><code>author:username</code>
+: The Member's Username.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/experience">experience</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+  </body>
+</html>
