@@ -56,29 +56,24 @@ class Test_author_info extends Testee_unit_test_case {
   }
 
 
-  public function test__default_tag__returns_no_results_if_no_entry_id_parameter()
+  public function test__default_tag__returns_empty_handed_if_no_entry_id_parameter()
   {
-    $no_results = 'No results.';
-    $tmpl       = $this->EE->TMPL;
+    $tmpl = $this->EE->TMPL;
 
     $this->_pi_model->expectNever('get_author_info_from_entry_id');
-
     $tmpl->returns('fetch_param', FALSE, array('entry_id'));
-    $tmpl->returns('no_results', $no_results);
 
     $subject = new Author_info();
-    $this->assertIdentical($no_results, $subject->return_data);
+    $this->assertIdentical('', $subject->return_data);
   }
 
 
-  public function test__default_tag__returns_no_results_if_model_returns_false()
+  public function test__default_tag__returns_empty_handed_if_model_returns_false()
   {
-    $entry_id   = '10';
-    $no_results = 'No results.';
-    $tmpl       = $this->EE->TMPL;
+    $entry_id = '10';
+    $tmpl = $this->EE->TMPL;
 
     $tmpl->returns('fetch_param', $entry_id, array('entry_id'));
-    $tmpl->returns('no_results', $no_results);
 
     $this->_pi_model->expectOnce('get_author_info_from_entry_id',
       array($entry_id));
@@ -86,7 +81,7 @@ class Test_author_info extends Testee_unit_test_case {
     $this->_pi_model->returns('get_author_info_from_entry_id', FALSE);
 
     $subject = new Author_info();
-    $this->assertIdentical($no_results, $subject->return_data);
+    $this->assertIdentical('', $subject->return_data);
   }
 
 

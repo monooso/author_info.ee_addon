@@ -127,7 +127,7 @@ USAGE;
       OR ! $author = $this->_pi_model->get_author_info_from_entry_id($entry_id)
     )
     {
-      $this->return_data = $this->EE->TMPL->no_results();
+      // Abandon all hope.
       return;
     }
 
