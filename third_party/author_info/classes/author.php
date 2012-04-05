@@ -51,6 +51,7 @@ class Author extends EI_datatype
     switch ($prop_name)
     {
       case 'group_id':
+      case 'member_id':
         if (valid_int($prop_value, 1))
         {
           $valid_value  = TRUE;
@@ -86,11 +87,12 @@ class Author extends EI_datatype
   public function reset()
   {
     $this->_props = array(
-      'group_id'    => 0,
-      'username'    => '',
-      'screen_name' => '',
       'email'       => '',
-      'is_admin'    => FALSE
+      'group_id'    => 0,
+      'is_admin'    => FALSE,
+      'member_id'   => 0,
+      'username'    => '',
+      'screen_name' => ''
     );
 
     return $this;
