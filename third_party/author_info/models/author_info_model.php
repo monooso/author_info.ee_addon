@@ -6,9 +6,10 @@
  * @author          Stephen Lewis (http://github.com/experience/)
  * @copyright       Experience Internet
  * @package         Author_info
- * @version         0.1.0
+ * @version         1.0.0
  */
 
+require_once dirname(__FILE__) .'/../config.php';
 require_once dirname(__FILE__) .'/../classes/author.php';
 require_once dirname(__FILE__) .'/../helpers/EI_number_helper.php';
 
@@ -54,13 +55,13 @@ class Author_info_model extends CI_Model {
     $this->_namespace = $namespace ? strtolower($namespace) : 'experience';
 
     $this->_package_name = $package_name
-      ? strtolower($package_name) : 'author_info';
+      ? strtolower($package_name) : strtolower(AUTHOR_INFO_NAME);
 
     $this->_package_title = $package_title
-      ? $package_title : 'Author Info';
+      ? $package_title : AUTHOR_INFO_TITLE;
 
     $this->_package_version = $package_version
-      ? $package_version : '0.1.0';
+      ? $package_version : AUTHOR_INFO_VERSION;
 
     // Initialise the add-on cache.
     if ( ! array_key_exists($this->_namespace, $this->EE->session->cache))
