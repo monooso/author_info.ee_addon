@@ -65,14 +65,9 @@ class Author_info {
     $this->_pi_model = $this->EE->author_info_plugin_model;
 
     // Retrieve the entry ID.
-    if ( ! $entry_id = $this->EE->TMPL->fetch_param('entry_id'))
-    {
-      $this->return_data = $this->EE->TMPL->no_results();
-      return;
-    }
-
-    // Retrieve the member info.
-    if ( ! $author = $this->_pi_model->get_author_info_from_entry_id($entry_id))
+    if ( ! $entry_id = $this->EE->TMPL->fetch_param('entry_id')
+      OR ! $author = $this->_pi_model->get_author_info_from_entry_id($entry_id)
+    )
     {
       $this->return_data = $this->EE->TMPL->no_results();
       return;
