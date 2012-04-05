@@ -41,7 +41,7 @@ class Author_info {
     return <<<USAGE
 ## Overview
 Author Info provides additional information about the author of a Channel entry.
-It is intended for use within a standard {exp:channel:entries} tag, or
+It is intended for use within a standard `{exp:channel:entries}` tag, or
 equivalent.
 
 ## Example Usage
