@@ -8,14 +8,16 @@
  * @package         Author_info
  */
 
+require_once dirname(__FILE__) .'/config.php';
+
 $plugin_info = array(
   'pi_author'       => 'Stephen Lewis',
   'pi_author_url'   => 'http://experienceinternet.co.uk/',
   'pi_description'  => 'Provides additional information about the author of a'
                         .' Channel entry.',
-  'pi_name'         => 'Author Info',
+  'pi_name'         => AUTHOR_INFO_TITLE,
   'pi_usage'        => Author_info::usage(),
-  'pi_version'      => '0.1.0'
+  'pi_version'      => AUTHOR_INFO_VERSION
 );
 
 class Author_info {
