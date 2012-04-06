@@ -45,35 +45,21 @@ class Author extends EI_datatype
       return;
     }
 
-    // Validate the property value.
-    $valid_value = FALSE;
-
+    // Validate and set the property value.
     switch ($prop_name)
     {
       case 'group_id':
       case 'member_id':
-        if (valid_int($prop_value, 1))
-        {
-          $valid_value  = TRUE;
-          $prop_value   = intval($prop_value);
-        }
+        $this->_set_int_property($prop_name, $prop_value, 1);
         break;
 
       case 'is_admin':
-        if (is_bool($prop_value))
-        {
-          $valid_value = TRUE;
-        }
+        $this->_set_bool_property($prop_name, $prop_value);
         break;
 
       default:
-        $valid_value = TRUE;
+        $this->_props[$prop_name] = $prop_value;
         break;
-    }
-
-    if ($valid_value)
-    {
-      $this->_props[$prop_name] = $prop_value;
     }
   }
 
@@ -96,30 +82,6 @@ class Author extends EI_datatype
     );
 
     return $this;
-  }
-
-
-  /**
-   * Returns the instance as an associative array.
-   *
-   * @access public
-   * @param  string $prefix Optional key prefix.
-   * @return array
-   */
-  public function to_array($prefix = '')
-  {
-    $prefix = ($prefix && is_string($prefix))
-      ? rtrim($prefix, ':') .':'
-      : '';
-
-    $return = array();
-
-    foreach ($this->_props AS $key => $val)
-    {
-      $return[$prefix .$key] = $val;
-    }
-
-    return $return;
   }
 
 
